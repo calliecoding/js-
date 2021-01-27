@@ -55,13 +55,40 @@
     //     e.stopPropagation() //做兼容
     //     return false;
     // }) 
-    $('div').on('mousewheel ',function(e,d){
-        console.log(1,e,d);
-    }) 
+    // $('div').on('mousewheel ',function(e,d){ 
+    //     console.log(1,e,d);
+    // }) 
 
-   
+   /* 测试 _addEvent*/
+   $('div').on('click click.h1 mouseenter.hi mouseleave.bye',function(e,d){
+        console.log(1);
+    }) 
     
-     
+    
+    /* 测试 off */
+    // $('div').off()  //解绑所有事件函数
+
+    //$('div').off(' ')  //不做任何操作
+    // $('div').off('click')  //解绑单一类型的事件
+    $('#wrap').off('click.hi')  //解绑单个自定义名函数的事件
+    // $('div').off('click.sayhi ')  //同时解绑多个事件
+
+/* 
+div.events = {
+  'click':{
+    say:fn,
+    hi:fn,
+    anonymous:[fn,fn,fn]  //为什么用数组存？因为用对象存还有取名字
+  }
+  'mouseenter':{
+    say:fn,
+    hi:fn,
+    anonymous:[fn,fn,fn]  
+  } 
+}
+  */
+
+
     
     </script>
 </body>
