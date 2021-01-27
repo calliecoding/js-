@@ -2,10 +2,8 @@
 //使用闭包，避免写在全局
 
 (function(){
-
-
-
     //getElementsByClassName 兼容
+
     if(! document.getElementsByClassName){
         document.getElementsByClassName = function(eleClassName){
             var aEle = document.getElementsByTagName('*'),//通配符，获取页面所有节点
@@ -20,6 +18,8 @@
         }
     }
     
+
+
 
     //trim 兼容
     if(!String.prototype.trim){ //判断trim方法是否存在
@@ -42,9 +42,7 @@
     //所有工具类都有一个 初始化的方法
     Callie.prototype = {
         constructor : Callie,
-
-         /* init初始化，用于获取元素/包装元素，返回对象 */
-        init: function(selector){
+        init: function(selector){ /* init初始化，用于获取元素/包装元素，返回对象 */
             //自定义数组,只有数组才可以遍历
             
             var arr = null;
@@ -165,11 +163,7 @@
     Callie.prototype.init.prototype = Callie.prototype
 
 
-    /* 封装 each 方法
-    
-    静态方法
-    */
-    
+    //静态方法
     Callie.each = function(obj,fn, that){ // 遍历对象 回调函数 可选参数（改变this指向）
 
         for (let i = 0; i < obj.length; i++) {
@@ -185,7 +179,7 @@
 
     }
 
-    /* 封装type 方法 */
+
     Callie.type = function (obj) {
 
         //获取object原型的toString方法
@@ -216,52 +210,3 @@
 
 }(window,document,undefined)) //封装工具类的时候，会把一些常用的东西传进去，因为很低版本的IE中，undefined是可以被修改的
 
-//获取元素
-
-
-/*原生JS获取元素时，返回值的规律
-id获取元素时，
-    获取成功时：返回单个节点标签
-    没有获取到的时候，返回null
-
-class获取元素时，
-     获取成功时：返回一个HTMLCollection集合，集合里面是标签节点
-     没有获取到的时候，返回一个HTMLCollection集合，集合里面是[]
-
-tag获取元素时，
-    与class获取元素相同
-
-querySelectorAll获取元素时：
-    获取成功时：返回一个NodeList集合，集合里面是标签节点
-    没有获取到的时候，返回一个NodeList集合，集合里面是[]
-
-总结：大多数返回的是一个类数组集合，只有id获取返回的单个节点
-
-
-
-*/
-
-
-
-/* 如何创建元素？
-用户传入 $('<div></div>')时
-
-当用户传入 $('<div><p></p></div>')
-<div><p></p></div>   这部分节点要如何创建？
-
-在body节点 放入子节点
-document.body.innerHTML = '<div><p></p></div>'
-通过document.body.children 获取子节点 ,返回的也是HTMLCollection集合
-
-同理在封装时，我们可以创建一个不存在的节点，再获取它的子节点
-
-*/
-
-
-/* 判断传入的选择器，是id？className？Tag？
- 
-1. 传递的是字符串，说明传的是选择器
-2. 进来的是对象，说明进来的是节点
-
-
-*/
