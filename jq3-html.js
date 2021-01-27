@@ -29,22 +29,8 @@
     }
 
 
-    //阻止默认行为的兼容
-    if(!Event.prototype.preventDefault){
-        //低版本IE
-        Event.prototype.preventDefault = function () {
-            window.event.returnValue = false
-        }
-    }
-    //阻止冒泡的兼容
-    if(!Event.prototype.stopPropagation){
-        //低版本IE
-        Event.prototype.stopPropagation = function () {
-            window.event.cancelBubble = true
-        }
-    }
 
-    //将添加到dom身上的函数事件存储
+
 
 
     //工具类(构造函数)
@@ -188,80 +174,8 @@
 
             }
         },
-        /* 封装on方法 */
-        on:function(eventType, fn){
 
-            //非字符串不做操作
-            if(typeof eventType !== 'string') return;
-
-            //去除空格，拿到有效事件名
-            var arr = eventType.trim().split(/\s+/)
-
-            //遍历实例对象  $('div')
-            for (var i = 0 , len = this.length; i < len; i++) {
-                //取出每个dom节点，绑定事件
-                
-               
-                (function(i,that){
-                    //that 代表当前jq对象中的元素
-
-                     //遍历事件名，因为可能传递多个事件名 click mouseenter
-                    for (var j = 0, len2 = arr.length; j < len2; j++) {
-                            var type = arr[j] .split(/\./);
-                            // console.log(type[0]);
-                        
-
-                            if(type[0] === 'mousewheel'){
-                                //判断是火狐还是其他浏览器事件
-                                function _eventWheelFn(e) {
-                                    //兼容事件对象
-                                    e = e || window.event;
-                                   
-                                    //对方向值做处理
-                                    var dir = e.wheelDelta / 120 || -e.detail / 3;
-
-                                    //执行函数，判断return值，来阻止默认行为
-                                    if(fn.call(that, e, dir) === false){
-                                        e.preventDefault();
-                                    }
-                                }
-
-                                //判断滚轮事件名是哪个, 对象的事件不存在时，为null
-                                type[0] = (that.onmousewheel === null) ? 'mousewheel' : 'DOMMouseScroll'
-
-                                console.log(type[0]);
-                                //添加事件函数
-                                that.addEventListener ? that.addEventListener(type[0],_eventWheelFn,false) : that.attachEvent('on'+ type[0],_eventWheelFn)
-                               
-
-                            }else{  
-                                //阻止事件默认行为，阻止冒泡
-                                function _eventFn(e) {
-                                    //兼容事件对象
-                                    e = e || window.event;
-                                   
-                                    if( fn.call(that,e) === false){
-                                        e.preventDefault();
-                                    }
-                                }
-
-
-                                //因为attachEvent 默认不支持捕获，为了统一，所以addEventListener也要设置成不支持捕获
-                                that.addEventListener ? that.addEventListener(type[0],_eventFn,false) : that.attachEvent('on'+ type[0],_eventFn)
-
-                                //存储对应的事件函数
-
-                            }
-                        
-                    }
-                    
-                }(i,this[i])) //传递this
-                
-            }
-
-        },
-
-        off:function(){
+        on:function(){
 
         }
     }

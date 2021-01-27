@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="wrap">
-        <div></div>
+    哈哈哈哈
     </div>
     <div></div>
     <div></div>
@@ -44,6 +44,20 @@
     /* 测试 html  */
     // console.log( $('div').html() );
     // console.log( $('div').html('hi') );
+
+    /* 测试 on */
+
+    // $('div').on(' ',function(){}) 
+    // $('div').on('click mouseenter',function(){}) 
+    // $('div').on('click mousewheel.sayhello',function(e){
+    //     console.log(111);
+    //     e.preventDefault(); //做兼容
+    //     e.stopPropagation() //做兼容
+    //     return false;
+    // }) 
+    $('div').on('mousewheel ',function(e,d){
+        console.log(1,e,d);
+    }) 
 
    
     
