@@ -487,6 +487,18 @@
                 })
                return this
             }
+        },
+        /* 通过下标取到对应元素，返回jq对象 */
+        eq:function (index) {
+            var len = this.length;
+
+            if(index >= len ||index < 0){
+                throw Error('超出length长度')
+            }
+
+            //this[0] 返回的是原生dom节点，但需要的是JQ对象
+            //调用init方法   注意new
+            return new this.init(this[index])
         }
     }
 
