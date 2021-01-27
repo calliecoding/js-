@@ -52,9 +52,8 @@
                     id : function(selector){
                         var dom = document.getElementById(selector.slice(1))
 
-                        dom = null ? [] : [dom]
-                        
-                        return dom
+                        //判断当前dom是不是null
+                        return dom === null ? [] : [dom]
                     },
 
                     className : function(selector){
@@ -89,7 +88,7 @@
             if(typeof selector === 'string'){//进来的是选择条件
                 
                //去除首尾空格
-                selector = selector.trim(selector)   //trim 只兼容到 9 ，为了兼容 IE8，所以要做兼容
+                selector = selector.trim()   //trim 只兼容到 9 ，为了兼容 IE8，所以要做兼容
                 
 
                 //判断是选择器还是创建标签  
@@ -155,6 +154,27 @@
 
         },
 
+        /* 获取或设置元素的文本内容 */
+        html:function(str){
+            if(Callie.type(str) === 'undefined'){ 
+                //html函数中没有穿参数时，就是获取元素
+                //如：$('div').html()
+                var val = this[0].innerHTML
+                return val
+
+            }else{
+                //设置文本内容
+                //如，$('div').html('hello')
+                //节点集合，遍历设置文本内容
+                Callie.each(this,function(v){ //this拿到实例对象
+                    v.innerHTML = str
+                })
+                //链式操作，返回this
+                return this
+
+            }
+        },
+
         on:function(){
 
         }
@@ -190,9 +210,8 @@
 
         //获取object原型的toString方法
         var toString = Object.prototype.toString
-
+        console.log(obj);
         var type = {
-            
             "number":'number',
             "string":'string',
             "boolean":'boolean',
@@ -206,6 +225,7 @@
             "[object Object]":'object'
         }
 
+        
         return type[typeof obj] || type[toString.call(obj)]
 
     }
