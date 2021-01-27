@@ -60,9 +60,9 @@
     // }) 
 
    /* 测试 _addEvent*/
-   $('div').on('click click.h1 mouseenter.hi mouseleave.bye',function(e,d){
-        console.log(1);
-    }) 
+//    $('div').on('click click.h1 mouseenter.hi mouseleave.bye',function(e,d){
+//         console.log(1);
+//     }) 
     
     
     /* 测试 off */
@@ -70,7 +70,7 @@
 
     //$('div').off(' ')  //不做任何操作
     // $('div').off('click')  //解绑单一类型的事件
-    $('#wrap').off('click.hi')  //解绑单个自定义名函数的事件
+    // $('#wrap').off('click.hi')  //解绑单个自定义名函数的事件
     // $('div').off('click.sayhi ')  //同时解绑多个事件
 
 /* 
@@ -88,6 +88,10 @@ div.events = {
 }
   */
 
+
+  /* 测试 text */
+  console.log($('#wrap').text() );
+ //
 
     
     </script>
