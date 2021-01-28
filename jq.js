@@ -167,7 +167,6 @@
             
            
             //判断参数是哪个获取元素的方法
-            
             if(typeof selector === 'string'){//进来的是选择条件
                 
                //去除首尾空格
@@ -200,9 +199,11 @@
                arr = obj[isSelector(selector)](selector)
 
 
-            }else if(typeof selector === 'Object'){
+            }else if(typeof selector === 'object'){
                 //进来的是节点对象
                 arr = [selector]; //包在数组里，数组才可以遍历
+
+               
             }
 
             for (let i = 0; i < arr.length; i++) {
@@ -581,7 +582,7 @@
                         
                     }
                     
-                    console.log(arrEleClass);
+                    // console.log(arrEleClass);
 
                     v.className = arrEleClass.join(' ')
                 })
@@ -589,10 +590,58 @@
             }
         },
 
+        
         /* 判断类名是否存在 */
+        hasClass:function (cName) {
+            //$('#wrap').hasClass('box1')，只传递一个参数
+            
+            
+            var isClass = false; 
+            
+            //遍历jq对象
+            Callie.each(this,function(v){
+                
+                //去除参数，前后的字符串
+                cName = cName.trim()
+                
+                var reg = new RegExp('\\b'+ cName + '\\b') //匹配单词边界
+                if(reg.test(v.className)){ //匹配到
+                    isClass = true;
+                    return false; //结束当前到遍历， 封装的each方法里有
+                }
+            })
+            
+            return isClass;
+        },
+        
+        /* 判断类名是否存在 */
+        toggleClass:function (cName) {
+            
+            //遍历元素，toggleClass
+            Callie.each(this,function(v){
+                //each 方法里面的this指向某一元素,是原生节点
+                //hasClass是JQ对象的方法，是原生节点
+                //为了调用方法，把原生节点 包装成JQ对象
+    
+                var that = Callie(v);
+             
+    
+                if (that.hasClass(cName)) {
+                    //有类名，删除
+                    that.removeClass(cName)
+                    
+                }else{
+                    //没有类名，添加
+                    that.addClass(cName)
+                }
+            })
+            return this
+        },
+
+
         
     }
-
+    
 
     //设置init原型 = Callie类的原型
     Callie.prototype.init.prototype = Callie.prototype
