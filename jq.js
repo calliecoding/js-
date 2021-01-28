@@ -499,7 +499,51 @@
             //this[0] 返回的是原生dom节点，但需要的是JQ对象
             //调用init方法   注意new
             return new this.init(this[index])
+        },
+
+        /* 封装addClass */
+        addClass:function(cName){
+            if (typeof cName === 'string') {
+                var arrCName = cName.trim().split(/\s+/);
+
+                //排除空串
+                if(arrCName.toString()==='')return this;
+
+               
+                //遍历元素，添加类名
+                Callie.each(this, function(v){
+
+                   /*  类名去重 */
+                    //拿到元素本身的类名,拼接
+                    var arrEleClass = null;
+                    if(v.className ===''){
+                        arrEleClass = arrCName
+                    }else{
+                        
+                        arrEleClass = v.className.trim().split(/\s+/).concat(arrCName)
+                    }
+                    
+                    for (var i = 0; i < arrEleClass.length; i++) { //从前往后取数据
+                        
+                        for (var j = arrEleClass.length - 1; j > i; j--) { //从后往前取数据
+                           if(arrEleClass[i] === arrEleClass[j]){
+                               //删除重复项
+                               arrEleClass.splice(j,1);
+                           }
+                            
+                        }
+                        
+                    }
+
+                    //arrEleClass 现在是非重复项的数组
+
+                    //添加类名
+                    v.className = arrEleClass.join(' ')
+                   
+                })
+            }
         }
+
     }
 
 
