@@ -707,7 +707,7 @@
         /* 操作自定义标签属性 */
         attr: function (arg1, arg2) {
             var type = Callie.type(arg1);
-                
+
             if (type === 'string') { //判断第一个参数是不是字符串
 
                 //判断是设置css，还是获取css
@@ -715,7 +715,7 @@
                     //存在第二个参数，设置css
                     this.each(function () {
                         //console.log(this); //this 指向进来的元素
-                        this.setAttribute(arg1,arg2)
+                        this.setAttribute(arg1, arg2)
                     })
 
                     return this
@@ -724,7 +724,7 @@
                     //获取
                     //判断是不是主流浏览器
                     return this[0].getAttribute(arg1)
-                  
+
                 }
 
             } else if (type === 'object') { //参数是{}
@@ -737,9 +737,9 @@
         },
 
         /* 操作合法的标签属性 , prop在操控布尔值属性时，能正确返回布尔值*/
-        prop: function (arg1,arg2) {
+        prop: function (arg1, arg2) {
             var type = Callie.type(arg1);
-                
+
             if (type === 'string') { //判断第一个参数是不是字符串
 
                 //判断是设置css，还是获取css
@@ -756,7 +756,7 @@
                     //获取
                     //判断是不是主流浏览器
                     return this[0][arg1]
-                  
+
                 }
 
             } else if (type === 'object') { //参数是{}
@@ -767,20 +767,149 @@
             }
         },
 
-        removeAttr: function(str){
-            if(Callie.type(str) === 'undefined')return this;
+        removeAttr: function (str) {
+            if (Callie.type(str) === 'undefined') return this;
             var arr = str.trim().split(/\s+/);
             this.each(function (v) {
                 //v 表示当前元素
 
                 //遍历arr ，移除多个属性
-                Callie.each(arr,function (attr) {
+                Callie.each(arr, function (attr) {
                     v.removeAttribute(attr)
                 })
             })
 
             return this
+        },
+
+        /* 节点添加 */
+        appendTo: function (select) {
+
+            var that = this;
+
+            /* 
+                select 可以是
+                JQ对象
+                css选择器
+                节点对象
+            */
+
+            //想得到一个包含select的对象,因为需要这个元素可遍历
+            //判断是不是JQ对象
+            if (!(select instanceof Callie)) {//不是jq对象时
+                //包装成jq对象，方便后面遍历
+                select = Callie(select)
+            }
+
+
+            // console.log(that); //拿到父元素
+            select.each(function (v) {  //遍历父jq对象
+                //v 代表当前元素
+
+                var fragment = document.createDocumentFragment();
+                that.each(function () {//遍历子jq对象
+                    var node = this.cloneNode(true);//深克隆节点，克隆文本，不克隆事件
+
+                    //克隆事件，并绑定
+                    for (var key1 in this.events) {//遍历this上的events事件，key是事件类型
+
+                        for (var key2 in this.events[key1]) {//k是事件函数的名字
+                            //遍历事件类型下，对应的有名和无名的事件函数
+
+                            //有名函数直接绑定，匿名函数需要遍历数组
+
+                            if (key2 === 'anonymous') {
+                                //对匿名函数进行绑定,还需要遍历
+                                Callie.each(this.events[key1][key2], function () {
+                                    Callie(node).on(key1, this)
+                                })
+
+                            } else {
+                                //对有名函数进行绑定
+                                Callie(node).on(key1 + '.' + key2, this.events[key1][key2])
+
+                            }
+
+                        }
+                    }
+
+
+
+
+                    fragment.appendChild(node)
+
+                    //移除本身节点
+                    //判断 this.parentNode是否存在
+                    this.parentNode && this.parentNode.removeChild(this)
+                })
+
+                //将文档碎片，添加到父元素内部
+                this.appendChild(fragment)
+            })
+
+            return this
+        },
+
+        /* 节点添加 */
+        append: function (select) {
+            if (!select) return;
+            
+            //判断是不是JQ对象
+            if (!(select instanceof Callie)) {//不是jq对象时
+                //传的css选择器或者节点
+                //包装成jq对象，方便后面遍历
+                Callie(select).appendTo(this)
+            }else{ //是jq对象时
+                select.appendTo(this)
+            }
+            return this
+        },
+
+        /* 移除节点 */
+        remove:function(select){
+            /* 
+            不传：移除所有节点
+
+            传递：节点，css选择器
+            */
+
+            var type = Callie.type(select);
+
+            if (type === 'undefined') {  //移除所有子节点
+               
+                this.each(function(){
+                    this.innerHTML = ''
+                })                
+            }else if(select instanceof Callie){ //传入是jq对象
+
+                this.each(function(v){
+                    //v代表父节点
+                    
+                    select.each(function(){
+                        if(this.parentNode === v){//判断是不是父节点的子节点
+                            v.removeChild(this)
+                        }
+                    })
+                })
+
+            }else if(type === 'string'){ //传入的是子如此
+                var jq = Callie(select); //包装成jq对象，
+
+                this.each(function(v){
+                    //v代表父节点
+                    
+                    jq.each(function(){
+                        if(this.parentNode === v){//判断是不是父节点的子节点
+                            v.removeChild(this)
+                        }
+                    })
+                })
+
+            }
         }
+
+
+
 
     }
 

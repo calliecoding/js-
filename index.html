@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>测试文档</title>
     <script src="./jq.js"></script>
 </head>
+
 <body>
     <div id="wrap">
-    哈哈哈哈
+        id="wrap"
     </div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+    <div class="wrap">
+        class="wrap"
+    </div>
+    <div> div1</div>
+    <div>div2</div>
+    <div class="box">box1</div>
+    <div class="box">box2</div>
+    <div>div3</div>
     <input type="checkbox">
     <script>
-    
-    /* 测试 init方法  */
+
+        /* 测试 init方法  */
     //  console.log( $('#ad'));
     //  console.log( $('#wrap'));
     //  console.log( $('div'));
 
-    
-    /* 测试原生 Object.prototype.toString 方法 */
+
+        /* 测试原生 Object.prototype.toString 方法 */
     //  console.log(Object.prototype.toString.call(/\w/));
     //  console.log(Object.prototype.toString.call(null));
     //  console.log(Object.prototype.toString.call(NaN));
@@ -35,18 +41,18 @@
     //  console.log(Object.prototype.toString.call(new Date()));
     //  console.log(Object.prototype.toString.call(function(){}));
     //  console.log(Object.prototype.toString.call(Math));
-  
-    /* 测试type  */
+
+        /* 测试type  */
     // console.log( $.type({}) );
     // console.log( $.type(/\w/) );
     // console.log( $.type(NaN) );
-     
-    
-    /* 测试 html  */
+
+
+        /* 测试 html  */
     // console.log( $('div').html() );
     // console.log( $('div').html('hi') );
 
-    /* 测试 on */
+        /* 测试 on */
 
     // $('div').on(' ',function(){}) 
     // $('div').on('click mouseenter',function(){}) 
@@ -60,13 +66,13 @@
     //     console.log(1,e,d);
     // }) 
 
-   /* 测试 _addEvent*/
+        /* 测试 _addEvent*/
 //    $('div').on('click click.h1 mouseenter.hi mouseleave.bye',function(e,d){
 //         console.log(1);
 //     }) 
-    
-    
-    /* 测试 off */
+
+
+        /* 测试 off */
     // $('div').off()  //解绑所有事件函数
 
     //$('div').off(' ')  //不做任何操作
@@ -74,43 +80,43 @@
     // $('#wrap').off('click.hi')  //解绑单个自定义名函数的事件
     // $('div').off('click.sayhi ')  //同时解绑多个事件
 
-/* 
-div.events = {
-  'click':{
-    say:fn,
-    hi:fn,
-    anonymous:[fn,fn,fn]  //为什么用数组存？因为用对象存还有取名字
-  }
-  'mouseenter':{
-    say:fn,
-    hi:fn,
-    anonymous:[fn,fn,fn]  
-  } 
-}
-  */
+        /*
+        div.events = {
+          'click':{
+            say:fn,
+            hi:fn,
+            anonymous:[fn,fn,fn]  //为什么用数组存？因为用对象存还有取名字
+          }
+          'mouseenter':{
+            say:fn,
+            hi:fn,
+            anonymous:[fn,fn,fn]
+          }
+        }
+          */
 
 
-  /* 测试 text */
+        /* 测试 text */
 //  console.log($('#wrap').text() );
- 
- /* 测试 addClass */
+
+        /* 测试 addClass */
 //  $('div').addClass('box2 box2 box1 box3') ; //测试去重
 
 
- /* 测试 removeClass */
+        /* 测试 removeClass */
 //  $('#wrap').removeClass() ; //移除所有类名
 //  $('#wrap').removeClass('box1') ; //移除所有类名
 
 
-/* 测试 hasClass */
+        /* 测试 hasClass */
 // console.log($('#wrap').hasClass('box') ); 
 
-/* 测试  toggleClass  ，只传一个类名*/
+        /* 测试  toggleClass  ，只传一个类名*/
 // $('#wrap').toggleClass('box1') 
 // $('#wrap').toggleClass('box1') 
 
 
-/* 测试  css */
+        /* 测试  css */
 // $('#wrap').css('width') ;  //获取第0个元素的属性值 
 
 //  $('#wrap').css('width','200px') ;  //设置属性值
@@ -123,7 +129,7 @@ div.events = {
 //  }) ;  
 
 
-/*  测试attr */
+        /*  测试attr */
 
 // $('#wrap').attr('mywidth') //获取
 
@@ -136,21 +142,32 @@ div.events = {
 
 
 
- /*  测试 prop */
+        /*  测试 prop */
 // $('input').prop('checked') //获取
 
 // $('input').prop('checked','hhh') //设置
 
- $('input').prop({ //设置多个attr
-   title:'100',
-   checked:true
- }) ; 
+//  $('input').prop({ //设置多个attr
+//    title:'100',
+//    checked:true
+//  }) ; 
 
 
-/* 移除  removeAttr*/
+        /* 测试  removeAttr*/
 
 // $('div').removeAttr('title')
-    
+
+
+        /* 测试 appendTo */
+// $('.wrap').appendTo('.box')
+// $('.wrap').on('click.hi mouseenter', function(){
+//     console.log(this.events);
+// })
+// $('.wrap').appendTo('.box')
+
+
+
     </script>
 </body>
+
 </html>
