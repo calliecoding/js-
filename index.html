@@ -14,6 +14,7 @@
     <div></div>
     <div></div>
     <div></div>
+    <input type="checkbox">
     <script>
     
     /* 测试 init方法  */
@@ -93,7 +94,7 @@ div.events = {
 //  console.log($('#wrap').text() );
  
  /* 测试 addClass */
- $('#wrap').addClass('box2 box2 box1 box3') ; //测试去重
+//  $('div').addClass('box2 box2 box1 box3') ; //测试去重
 
 
  /* 测试 removeClass */
@@ -109,9 +110,46 @@ div.events = {
 // $('#wrap').toggleClass('box1') 
 
 
+/* 测试  css */
+// $('#wrap').css('width') ;  //获取第0个元素的属性值 
+
+//  $('#wrap').css('width','200px') ;  //设置属性值
+//  $('#wrap').css('width, 100') ;  //设置属性值
+
+
+//  $('#wrap').css({ //设置多个属性值
+//    height:100,
+//    width:100
+//  }) ;  
+
+
+/*  测试attr */
+
+// $('#wrap').attr('mywidth') //获取
+
+// $('#wrap').attr('mywidth','hhh') //设置
+
+//  $('#wrap').attr({ //设置多个attr
+//    myheight:'100',
+//    mywidth:'222'
+//  }) ; 
 
 
 
+ /*  测试 prop */
+// $('input').prop('checked') //获取
+
+// $('input').prop('checked','hhh') //设置
+
+ $('input').prop({ //设置多个attr
+   title:'100',
+   checked:true
+ }) ; 
+
+
+/* 移除  removeAttr*/
+
+// $('div').removeAttr('title')
     
     </script>
 </body>
