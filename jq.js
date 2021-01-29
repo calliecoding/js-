@@ -638,7 +638,17 @@
             return this
         },
 
+        /* 利用静态方法上的each，封装each  */
+        each:function(fn){
 
+            Callie.each(this, function (v,i,arr) {
+                var bool = fn.call(v,v,i,arr)
+                if(bool !== 'undefined'){
+                    return bool
+                }
+            })
+          
+        }
         
     }
     
