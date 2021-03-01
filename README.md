@@ -657,7 +657,7 @@ $('div').off('click.sayhi mouseenter')  //同时解绑多个事件
 
 
 
-# 工具（复杂）
+# 工具
 
 ## each
 
@@ -671,13 +671,13 @@ $('div').off('click.sayhi mouseenter')  //同时解绑多个事件
 
 #### HTML 代码:
 
-```
+```html
 <img/><img/>
 ```
 
 #### jQuery 代码:
 
-```
+```js
 $("img").each(function(){
    this.src = "test.jpg";
  });
