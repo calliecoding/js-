@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试文档</title>
+    <script src="../../jq.js"></script>
+</head>
+
+<body>
+    <!-- id -->
+    <div id="wrap">id="wrap"</div>
+
+    <!-- class -->
+    <div class="box">class="box"</div>
+    <div class="box">class="box"</div>
+
+    <!-- tag选择器 -->
+    <p>第一个p标签</p>
+    <p>第二个p标签</p>
+    
+
+    <!-- 子代、后代、相邻兄弟、兄弟选择器 -->
+    <form>
+        <label>Name:</label>
+        <input name="name" />
+        <fieldset>
+            <label>Newsletter:</label>
+            <input name="newsletter" />
+       </fieldset>
+      </form>
+    <input name="none" />
+
+    <!-- 选择器 -->
+
+
+ 
+    <script>
+
+        /* 测试 init方法  */
+        
+        console.group("%c%s", "color:red", '测试init时，元素的获取')
+        console.log('id选择器', $('#wrap'));
+        console.log('类名选择器', $('.box'));
+        console.log('单个tag选择器', $('p')); 
+        console.log('css3 选择器:子代', $("form > input")); 
+        console.log('css3 选择器:后代 ', $("form input")); 
+        console.log('css3 选择器:相邻兄弟', $("label + input")); 
+        console.log('css3 选择器:兄弟', $("form ~ input")); 
+
+        console.log('传入节点对象包装成jQ对象', $(wrap)); 
+        console.log('创建节点对象', $(`<div class ='test'><p></p></div>`)); 
+        console.groupEnd();
+
+    </script>
+</body>
+
+</html>

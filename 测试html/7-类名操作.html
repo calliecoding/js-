@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试文档</title>
+    <script src="../../jq.js"></script>
+</head>
+
+<body>
+
+
+<div id="wrap"></div>
+
+</body>
+<script>
+
+    /* 测试 addClass */
+    console.group("%c%s", "color:red", '类名相关的')
+    console.group("%c%s", "color:red", '测试addClass')
+     $('div').addClass('box2 box2 box1 box3') ; //测试去重
+    console.groupEnd();
+
+
+    // /* 测试 removeClass */
+    // console.group("%c%s", "color:red", '测试removeClass')
+    //  $('div').removeClass() ; //移除所有类名
+    //  $('div').removeClass('box1') ; //移除指定类名
+    // console.groupEnd();
+
+
+    // /* 测试 hasClass */
+    // console.group("%c%s", "color:red", '测试hasClass')
+    console.log($('#wrap').hasClass('box1') ); 
+    // console.groupEnd();
+    // /* 测试  toggleClass  ，只传一个类名*/
+    // console.group("%c%s", "color:red", '测试toggleClass')
+    // $('#wrap').toggleClass('box1') 
+    // $('#wrap').toggleClass('box1') 
+    // console.groupEnd();
+    // console.groupEnd();
+</script>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试文档</title>
+    <script src="../../jq.js"></script>
+</head>
+
+<body>
+
+    复选框<input type="checkbox">
+
+
+
+
+
+</body>
+<script>
+    /*  测试attr */
+    console.group("%c%s", "color:red", '测试attr时，获取元素自定义属性')
+
+    // $('#wrap').attr('mywidth') //获取
+
+    // $('#wrap').attr('mywidth','hhh') //设置
+
+     $('#wrap').attr({ //设置多个attr
+       myheight:'100',
+       mywidth:'222'
+     }) ; 
+    console.groupEnd();
+
+
+    /*  测试 prop */
+    console.group("%c%s", "color:red", '测试prop时，获取合法属性')
+    // $('input').prop('checked') //获取
+
+    $('input').prop('checked',true) //设置
+
+     $('input').prop({ //设置多个attr
+       title:'100',
+       checked:true
+     }) ; 
+
+    console.groupEnd();
+    /* 测试  removeAttr*/
+    console.group("%c%s", "color:red", '测试removeAttr时，移除自定义属性')
+    // $('div').removeAttr('title')
+    console.groupEnd();
+
+
+
+
+</script>
+
+</html>

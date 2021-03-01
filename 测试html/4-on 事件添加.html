@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试文档</title>
+    <script src="../../jq.js"></script>
+</head>
+
+<body>
+
+<div> 这是一个div</div>
+
+
+</body>
+<script>
+    console.group("%c%s", "color:red", '测试on，事件绑定')
+
+    // 参数处理，过滤空格
+    $('div').on(' ',function(){}) 
+
+    // 绑定多个事件
+    $('div').on('click mouseenter',function(){}) 
+
+    //有名函数
+    $('div').on('click mousewheel.sayhello',function(e){
+        console.log(111);
+        return false;
+    }) 
+
+    // $('div').on('mousewheel ',function(e,d){ 
+    //     console.log(1,e,d);
+    // }) 
+    console.groupEnd();
+
+</script>
+
+</html>

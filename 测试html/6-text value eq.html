@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试文档</title>
+    <script src="../../jq.js"></script>
+</head>
+
+<body>
+  
+<p>这是一个p标签</p>
+<span></span>
+<br>
+<input type="text" value="表单text"> 
+
+<div class="box">box1</div>
+<div class="box">box2</div>
+<div class="box">box3</div>
+  
+</body>
+  <script>
+
+ console.log($('p').text() );
+ console.log($('span').text('一个span') );
+ console.log($('input').value() );
+
+ console.log($('.box').eq(1));
+
+
+    </script>
+</html>

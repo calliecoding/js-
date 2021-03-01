@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试文档</title>
+    <script src="../../jq.js"></script>
+</head>
+
+<body>
+    <img/><img/>
+    <img/><img/>
+
+
+</body>
+<script>
+    /* 测试原生 Object.prototype.toString 方法 */
+    console.group('测试原生 Object.prototype.toString 方法')
+    console.log(Object.prototype.toString.call(/\w/));
+    console.log(Object.prototype.toString.call(null));
+    console.log(Object.prototype.toString.call(NaN));
+    console.log(Object.prototype.toString.call(''));
+    console.log(Object.prototype.toString.call(true));
+    console.log(Object.prototype.toString.call(1));
+    console.log(Object.prototype.toString.call([]));
+    console.log(Object.prototype.toString.call({}));
+    console.log(Object.prototype.toString.call(new Date()));
+    console.log(Object.prototype.toString.call(function () { }));
+    console.log(Object.prototype.toString.call(Math));
+    console.log(Object.prototype.toString.call(Symbol()));
+    console.groupEnd();
+
+    /* 测试type  */
+    console.group("%c%s", "color:red", '测试type，检测元素类型 ')
+    console.group('基础型数据')
+
+    console.log('传入数字', $.type(123));
+    console.log('传入NaN', $.type(NaN));
+    console.log('传入布尔值', $.type(true));
+    console.log('传入undefined', $.type(undefined));
+    console.log('传入null', $.type(null));
+    console.log('传入字符串', $.type("hello"));
+    console.log('传入Symbol', $.type(Symbol()));
+    console.groupEnd();
+
+    console.group('引用型数据')
+
+    console.log('传入对象', $.type({}));
+    console.log('传入正则', $.type(/\w/));
+    console.log('传入数组', $.type([1,2]));
+    console.log('传入函数', $.type(function () { }));
+    console.log('传入日期', $.type(new Date()));
+    console.log('传入Math', $.type(Math));
+    console.groupEnd();
+    console.groupEnd();
+
+   
+
+</script>
+
+</html>

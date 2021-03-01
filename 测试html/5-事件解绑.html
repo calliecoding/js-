@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试文档</title>
+    <script src="../../jq.js"></script>
+    <style>
+        .box {
+            width: 300px;
+            height: 300px;
+            background-color: #cdf;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='box'>class = 'box'</div>
+
+
+
+</body>
+<script>
+    $('.box').on("mouseenter",function(){ console.log('mouseenter');})
+    $('.box').on("click.hi",function(){ console.log('click.hi');})
+    $('.box').on("click",function(){ console.log('click1');})
+    $('.box').on("click",function(){ console.log('click2');})
+    $('.box').on("mouseleave",function(){ console.log('mouseleave');})
+
+    $('.box').off('click.hi')
+    
+
+
+
+</script>
+
+</html>

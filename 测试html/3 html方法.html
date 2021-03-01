@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试文档</title>
+    <script src="../../jq.js"></script>
+</head>
+
+<body>
+    
+    <p class="box1">class="box1" <span>span</span></p>
+    <p class="box2">class="box2"</p>
+    <div></div>
+ 
+</body>
+
+    <script>
+    console.group('测试 html')
+        console.log( '取得第一个匹配元素的html内容。',$('p').html() );
+        console.log( '设置html',$('div').html('hi') );
+        console.log( '给所有匹配的节点设置html',$('p').html('<span style="color:red">解析html</span>') );
+    console.groupEnd();
+
+    </script>
+</html>

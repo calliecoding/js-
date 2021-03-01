@@ -29,14 +29,14 @@
     }
 
 
-    //阻止默认行为的兼容
+    //事件：阻止默认行为的兼容
     if (!Event.prototype.preventDefault) {
         //低版本IE
         Event.prototype.preventDefault = function () {
             window.event.returnValue = false
         }
     }
-    //阻止冒泡的兼容
+    //事件：阻止冒泡的兼容
     if (!Event.prototype.stopPropagation) {
         //低版本IE
         Event.prototype.stopPropagation = function () {
@@ -44,25 +44,25 @@
         }
     }
 
-    //将添加到dom身上的函数事件存储
+    //事件：将添加到dom身上的函数事件存储
     function _addEvent(data) { //data对象里面的参数：dom事件节点, type事件数组, fn事件函数
 
 
         /* 
         
         //一个事件名，绑定多个事件
-                div.events = {
-                    'click':{
-                        say:fn,
-                        hi:fn,
-                        anonymous:[fn,fn,fn]  //为什么用数组存？因为用对象存还有取名字
-                    }
-                    'mouseenter':{
-                        say:fn,
-                        hi:fn,
-                        anonymous:[fn,fn,fn]  //为什么用数组存？因为用对象存还有取名字
-                    }
+            div.events = {
+                'click':{
+                    say:fn,
+                    hi:fn,
+                    anonymous:[fn,fn,fn]  //为什么用数组存？因为用对象存还有取名字
                 }
+                'mouseenter':{
+                    say:fn,
+                    hi:fn,
+                    anonymous:[fn,fn,fn]  //为什么用数组存？因为用对象存还有取名字
+                }
+            }
         */
 
 
@@ -104,9 +104,9 @@
     }
 
 
-    //兼容removeEventListener  
+    //事件：兼容removeEventListener  
     function _removeEvent(dom, type, fn, bool) {
-
+       
         if (dom.removeEventListener) {
             //主流浏览器
             dom.removeEventListener(type, fn, bool)
@@ -157,7 +157,7 @@
 
                     div.innerHTML = selector;
 
-                    div.children //取出节点，返回一个HTMLCollection集合
+                    return div.children //取出节点，返回一个HTMLCollection集合
                 },
                 //css3 选择器
                 css3: function (selector) {
@@ -203,7 +203,6 @@
                 //进来的是节点对象
                 arr = [selector]; //包在数组里，数组才可以遍历
 
-
             }
 
             for (let i = 0; i < arr.length; i++) {
@@ -238,7 +237,7 @@
 
         },
 
-        /* 获取或设置元素的文本内容 */
+        /* 获取或设置元素的html内容 */
         html: function (str) {
             if (Callie.type(str) === 'undefined') {
                 //html函数中没有穿参数时，就是获取元素
@@ -281,8 +280,10 @@
                         // console.log(type);
 
 
+                        //滚轮事件的处理
                         if (type[0] === 'mousewheel') {
-                            //判断是火狐还是其他浏览器事件
+                            
+                             //滚轮事件兼容
                             function _eventWheelFn(e) {
                                 //兼容事件对象
                                 e = e || window.event;
@@ -303,7 +304,8 @@
 
 
 
-                        } else {
+                        } else { //其他事件的处理
+                            
                             //阻止事件默认行为，阻止冒泡
                             function _eventFn(e) {
                                 //兼容事件对象
@@ -320,6 +322,7 @@
 
                         }
 
+                        
                         //添加事件函数,因为attachEvent 默认不支持捕获，为了统一，所以addEventListener也要设置成不支持捕获
                         that.addEventListener ? that.addEventListener(type[0], eventFnName, false) : that.attachEvent('on' + type[0], eventFnName)
 
@@ -340,8 +343,9 @@
 
         /* 封装off方法,移除事件函数*/
         off: function (eventType) {
-            if (typeof eventType === 'undefined') {
-                //$('div').off()
+            
+            if (typeof eventType === 'undefined') { //$('div').off()
+               
                 //解绑元素上，所有事件类型，上的所有事件函数
                 Callie.each(this, function (v) {
                     //v 表示当前元素
@@ -382,8 +386,9 @@
                 })
 
 
-            } else if (typeof eventType === 'string') { //安装需求解绑事件
+            } else if (typeof eventType === 'string') { //  
                 //$('div').off(‘str’)
+                
                 //得到事件名数组
                 var arr = eventType.trim().split(/\s+/);  //处理字符串，如['click','mouseenter']
 
@@ -399,11 +404,12 @@
                     //拆分事件名、事件函数
                     var type = arr[i].split(/\./)
                     // console.log(type);//如["click", "sayhi"]
-
+                    
 
                     //遍历实例对象，取到节点元素，解绑元素上对应的事件
                     Callie.each(this, function (v) {
 
+                      
                         //判断是否是火狐，修改滚动事件名
                         if (type[0] === 'mousewheel') {
                             type[0] = (v.onmousewheel === null) ? 'mousewheel' : 'DOMMouseScroll'
@@ -411,36 +417,37 @@
 
                         //判断事件函数，是有名函数，还是匿名函数
                         if (type.length > 1) { //如["click", "sayhi"]
+                            
                             //解绑有名的事件函数
                             _removeEvent(v, type[0], v.events[type[0]][type[1]], false)
-
+                           
                             //删除属性
                             delete v.events[type[0]][type[1]]
 
-                        } else {//如["click"]
-                            //解绑同类型事件  ； 可以写在else里面，因为判断的时，进来的是["click"]
-
-                            //解绑同一事件类型中，的所有匿名事件，如结果click事件的所有匿名函数
-                            for (var z = 0, len = v.events.length; z < len; z++) {
-                                _removeEvent(v, type[0], v.events[type[0]].anonymous, false);
+                        } else {//解绑同类型事件   如["click"]
+                      
+                            //1 解绑同一事件类型中，的所有匿名事件，如click事件的所有匿名函数
+                            for (var z = 0, len = v.events[type[0]].anonymous.length; z < len; z++) {
+                                console.log(2);
+                                _removeEvent(v, type[0], v.events[type[0]].anonymous[z], false);
                             }
 
-                            //解绑同一事件类型中，的有名的事件函数
+                            //2 解绑同一事件类型中，所有有名的事件函数
                             for (var key3 in v.events[type[0]]) {
-                                // console.log(v.events[type[0]]);
-                                //判断是不是anonymous
-                                if (!(v.events[type[0]][key3] instanceof Array)) {
-                                    //不是anonymous时，解绑所有函数
+                              
+                                //不是anonymous [] 时，
+                                if (!(v.events[type[0]][key3] instanceof Array)) { 
+                                    //解绑所有 有名函数 click.hi
+                                    console.log(3);
                                     _removeEvent(v, type[0], v.events[type[0]][key3], false)
                                 }
                             }
-                            // console.log(v.events[type[0]]);
-
+                          
                             //删除 事件类型
                             delete v.events[type[0]]
                         }
 
-                        console.log(v.events);
+                       
 
 
                     })
@@ -640,8 +647,9 @@
 
         /* 利用静态方法上的each，封装each  */
         each: function (fn) {
-
+            
             Callie.each(this, function (v, i, arr) {
+               
                 var bool = fn.call(v, v, i, arr)
                 if (bool !== 'undefined') {
                     return bool
@@ -697,7 +705,7 @@
 
             } else if (type === 'object') { //参数是{}
                 for (var key in arg1) {
-                    this.css(key, arg1[key]) //调用自己写好的
+                    this.css(key, arg1[key]) //调用自己写好的css
                 }
 
                 return this
@@ -742,7 +750,7 @@
 
             if (type === 'string') { //判断第一个参数是不是字符串
 
-                //判断是设置css，还是获取css
+                //判断是设置属性，还是获取属性
                 if (!!arg2) {
                     //存在第二个参数，设置css
                     this.each(function () {
@@ -838,15 +846,16 @@
 
                     fragment.appendChild(node)
 
-                    //移除本身节点
-                    //判断 this.parentNode是否存在
+                    //原来的位置改变了，所以
+                    //判断 this.parentNode是否存在，之后移除节点
                     this.parentNode && this.parentNode.removeChild(this)
                 })
 
                 //将文档碎片，添加到父元素内部
                 this.appendChild(fragment)
+                fragment = null; //回收文档碎片
             })
-
+            
             return this
         },
 
@@ -865,13 +874,14 @@
             return this
         },
 
-        /* 移除节点 */
+        /* 移除子节点 */
         remove:function(select){
             /* 
             不传：移除所有节点
 
             传递：节点，css选择器
             */
+           
 
             var type = Callie.type(select);
 
@@ -881,7 +891,7 @@
                     this.innerHTML = ''
                 })                
             }else if(select instanceof Callie){ //传入是jq对象
-
+                
                 this.each(function(v){
                     //v代表父节点
                     
@@ -892,7 +902,8 @@
                     })
                 })
 
-            }else if(type === 'string'){ //传入的是子如此
+            }else if(type === 'string'){ //传入的是字符出（选择器）
+                
                 var jq = Callie(select); //包装成jq对象，
 
                 this.each(function(v){
@@ -900,6 +911,7 @@
                     
                     jq.each(function(){
                         if(this.parentNode === v){//判断是不是父节点的子节点
+                            console.log(v);
                             v.removeChild(this)
                         }
                     })
@@ -955,7 +967,8 @@
             "[object Date]": 'date',
             "[object Function]": 'function',
             "[object Math]": 'math',
-            "[object Object]": 'object'
+            "[object Object]": 'object',
+            "[object Symbol]": 'symbol'
         }
 
 

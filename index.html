@@ -11,6 +11,7 @@
 <body>
     <div id="wrap">
         id="wrap"
+        <div class="box"></div>
     </div>
     <div class="wrap">
         class="wrap"
@@ -24,61 +25,83 @@
     <script>
 
         /* 测试 init方法  */
-    //  console.log( $('#ad'));
-    //  console.log( $('#wrap'));
-    //  console.log( $('div'));
+        
+        console.group("%c%s", "color:red", '测试init时，元素的获取')
+        console.log('id选择器', $('#wrap'));
+        console.log('类名选择器', $('.box'));//
+        console.log('单个tag选择器', $('div')); //
+        console.log('css3 选择器:子代', $('#wrap > .box')); //
+        console.log('css3 选择器:后代 ', $('#wrap .box')); //
+        console.log('css3 选择器:兄弟', $('#wrap ~ .box')); //
+        console.log('css3 选择器:相邻兄弟', $('#wrap + .box')); //
+        console.log('传入节点对象', $(wrap)); //css3 选择器:子代 后代 兄弟
+        console.log('创建节点对象', $('<div><p></p></div>')); //css3 选择器:子代 后代 兄弟
+        console.groupEnd();
+
 
 
         /* 测试原生 Object.prototype.toString 方法 */
-    //  console.log(Object.prototype.toString.call(/\w/));
-    //  console.log(Object.prototype.toString.call(null));
-    //  console.log(Object.prototype.toString.call(NaN));
-    //  console.log(Object.prototype.toString.call(''));
-    //  console.log(Object.prototype.toString.call(true));
-    //  console.log(Object.prototype.toString.call(1));
-    //  console.log(Object.prototype.toString.call([]));
-    //  console.log(Object.prototype.toString.call({}));
-    //  console.log(Object.prototype.toString.call(new Date()));
-    //  console.log(Object.prototype.toString.call(function(){}));
-    //  console.log(Object.prototype.toString.call(Math));
+        console.group('测试原生 Object.prototype.toString 方法')
+        console.log(Object.prototype.toString.call(/\w/));
+        console.log(Object.prototype.toString.call(null));
+        console.log(Object.prototype.toString.call(NaN));
+        console.log(Object.prototype.toString.call(''));
+        console.log(Object.prototype.toString.call(true));
+        console.log(Object.prototype.toString.call(1));
+        console.log(Object.prototype.toString.call([]));
+        console.log(Object.prototype.toString.call({}));
+        console.log(Object.prototype.toString.call(new Date()));
+        console.log(Object.prototype.toString.call(function () { }));
+        console.log(Object.prototype.toString.call(Math));
+        console.groupEnd();
 
         /* 测试type  */
-    // console.log( $.type({}) );
-    // console.log( $.type(/\w/) );
-    // console.log( $.type(NaN) );
-
+        console.group("%c%s", "color:red", '测试type，检测元素类型 ')
+        console.log($.type({}));
+        console.log($.type(/\w/));
+        console.log($.type(NaN));
+        console.groupEnd();
 
         /* 测试 html  */
-    // console.log( $('div').html() );
-    // console.log( $('div').html('hi') );
+        console.group('测试 html')
+        // console.log( $('div').html() );
+        // console.log( $('div').html('hi') );
+        console.groupEnd();
+
+        console.group("%c%s", "color:red", '测试事件相关的')
+
 
         /* 测试 on */
-
-    // $('div').on(' ',function(){}) 
-    // $('div').on('click mouseenter',function(){}) 
-    // $('div').on('click mousewheel.sayhello',function(e){
-    //     console.log(111);
-    //     e.preventDefault(); //做兼容
-    //     e.stopPropagation() //做兼容
-    //     return false;
-    // }) 
-    // $('div').on('mousewheel ',function(e,d){ 
-    //     console.log(1,e,d);
-    // }) 
+        console.group("%c%s", "color:red", '测试on，事件绑定')
+        // $('div').on(' ',function(){}) 
+        // $('div').on('click mouseenter',function(){}) 
+        // $('div').on('click mousewheel.sayhello',function(e){
+        //     console.log(111);
+        //     e.preventDefault(); //做兼容
+        //     e.stopPropagation() //做兼容
+        //     return false;
+        // }) 
+        // $('div').on('mousewheel ',function(e,d){ 
+        //     console.log(1,e,d);
+        // }) 
+        console.groupEnd();
 
         /* 测试 _addEvent*/
-//    $('div').on('click click.h1 mouseenter.hi mouseleave.bye',function(e,d){
-//         console.log(1);
-//     }) 
+        console.group("%c%s", "color:red", '_addEvent，函数事件存储')
+        //    $('div').on('click click.h1 mouseenter.hi mouseleave.bye',function(e,d){
+        //         console.log(1);
+        //     }) 
+        console.groupEnd();
 
 
         /* 测试 off */
-    // $('div').off()  //解绑所有事件函数
+        console.group("%c%s", "color:red", '测试off时，事件移除')
+        // $('div').off()  //解绑所有事件函数
 
-    //$('div').off(' ')  //不做任何操作
-    // $('div').off('click')  //解绑单一类型的事件
-    // $('#wrap').off('click.hi')  //解绑单个自定义名函数的事件
-    // $('div').off('click.sayhi ')  //同时解绑多个事件
+        //$('div').off(' ')  //不做任何操作
+        // $('div').off('click')  //解绑单一类型的事件
+        // $('#wrap').off('click.hi')  //解绑单个自定义名函数的事件
+        // $('div').off('click.sayhi ')  //同时解绑多个事件
 
         /*
         div.events = {
@@ -94,78 +117,93 @@
           }
         }
           */
-
+        console.groupEnd();
+        console.groupEnd();
 
         /* 测试 text */
-//  console.log($('#wrap').text() );
+        console.group("%c%s", "color:red", '测试text时，innerText')
+        //  console.log($('#wrap').text() );
+        console.groupEnd();
 
         /* 测试 addClass */
-//  $('div').addClass('box2 box2 box1 box3') ; //测试去重
+        console.group("%c%s", "color:red", '类名相关的')
+        console.group("%c%s", "color:red", '测试addClass')
+        //  $('div').addClass('box2 box2 box1 box3') ; //测试去重
+        console.groupEnd();
 
 
         /* 测试 removeClass */
-//  $('#wrap').removeClass() ; //移除所有类名
-//  $('#wrap').removeClass('box1') ; //移除所有类名
+        console.group("%c%s", "color:red", '测试removeClass')
+        //  $('#wrap').removeClass() ; //移除所有类名
+        //  $('#wrap').removeClass('box1') ; //移除所有类名
+        console.groupEnd();
 
 
         /* 测试 hasClass */
-// console.log($('#wrap').hasClass('box') ); 
-
+        console.group("%c%s", "color:red", '测试hasClass')
+        // console.log($('#wrap').hasClass('box') ); 
+        console.groupEnd();
         /* 测试  toggleClass  ，只传一个类名*/
-// $('#wrap').toggleClass('box1') 
-// $('#wrap').toggleClass('box1') 
-
+        console.group("%c%s", "color:red", '测试toggleClass')
+        // $('#wrap').toggleClass('box1') 
+        // $('#wrap').toggleClass('box1') 
+        console.groupEnd();
+        console.groupEnd();
 
         /* 测试  css */
-// $('#wrap').css('width') ;  //获取第0个元素的属性值 
+        console.group("%c%s", "color:red", '测试css时，添加css样式')
+        // $('#wrap').css('width') ;  //获取第0个元素的属性值 
 
-//  $('#wrap').css('width','200px') ;  //设置属性值
-//  $('#wrap').css('width, 100') ;  //设置属性值
+        //  $('#wrap').css('width','200px') ;  //设置属性值
+        //  $('#wrap').css('width, 100') ;  //设置属性值
+        console.groupEnd();
 
-
-//  $('#wrap').css({ //设置多个属性值
-//    height:100,
-//    width:100
-//  }) ;  
+        //  $('#wrap').css({ //设置多个属性值
+        //    height:100,
+        //    width:100
+        //  }) ;  
 
 
         /*  测试attr */
+        console.group("%c%s", "color:red", '测试attr时，获取元素自定义属性')
 
-// $('#wrap').attr('mywidth') //获取
+        // $('#wrap').attr('mywidth') //获取
 
-// $('#wrap').attr('mywidth','hhh') //设置
+        // $('#wrap').attr('mywidth','hhh') //设置
 
-//  $('#wrap').attr({ //设置多个attr
-//    myheight:'100',
-//    mywidth:'222'
-//  }) ; 
-
+        //  $('#wrap').attr({ //设置多个attr
+        //    myheight:'100',
+        //    mywidth:'222'
+        //  }) ; 
+        console.groupEnd();
 
 
         /*  测试 prop */
-// $('input').prop('checked') //获取
+        console.group("%c%s", "color:red", '测试prop时，获取合法属性')
+        // $('input').prop('checked') //获取
 
-// $('input').prop('checked','hhh') //设置
+        // $('input').prop('checked','hhh') //设置
 
-//  $('input').prop({ //设置多个attr
-//    title:'100',
-//    checked:true
-//  }) ; 
+        //  $('input').prop({ //设置多个attr
+        //    title:'100',
+        //    checked:true
+        //  }) ; 
 
-
+        console.groupEnd();
         /* 测试  removeAttr*/
-
-// $('div').removeAttr('title')
-
+        console.group("%c%s", "color:red", '测试removeAttr时，移除自定义属性')
+        // $('div').removeAttr('title')
+        console.groupEnd();
 
         /* 测试 appendTo */
-// $('.wrap').appendTo('.box')
-// $('.wrap').on('click.hi mouseenter', function(){
-//     console.log(this.events);
-// })
-// $('.wrap').appendTo('.box')
+        console.group("%c%s", "color:red", '测试appendTo时，节点添加')
+        $('.wrap').appendTo('.box')
+        $('.wrap').on('click.hi mouseenter', function(){
+            console.log(this.events);
+        })
+        $('.wrap').appendTo('.box')
 
-
+        console.groupEnd();
 
     </script>
 </body>

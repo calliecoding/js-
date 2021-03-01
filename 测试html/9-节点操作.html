@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试文档</title>
+    <script src="../../jq.js"></script>
+</head>
+
+<body>
+
+    <div class="wrap">
+        id="wrap"
+
+    </div>
+    <div class="box">class="box"</div>
+    <div class="box">class="box"</div>
+
+
+    <div class="wrap2">class="wrap2"<span>hhi</span></div>
+    <div class="wrap2">class="wrap2"</div>
+    <div class="wrap2">class="wrap2"</div>
+
+    <p>Hello</p> how are <p>you?</p>
+
+
+</body>
+<script>
+    $('.wrap').appendTo('.box')
+
+    // 检测是否克隆事件
+    $('.wrap').on('click.hi mouseenter', function () {
+        console.log(this.events);
+    })
+
+    //从父节点中移除子节点
+    $('.wrap2').remove()
+
+  
+
+
+
+</script>
+
+</html>

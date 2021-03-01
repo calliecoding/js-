@@ -3,8 +3,6 @@
 
 (function(){
 
-
-
     //getElementsByClassName 兼容
     if(! document.getElementsByClassName){
         document.getElementsByClassName = function(eleClassName){
@@ -201,7 +199,6 @@
             for (var i = 0 , len = this.length; i < len; i++) {
                 //取出每个dom节点，绑定事件
                 
-               
                 (function(i,that){
                     //that 代表当前jq对象中的元素
 
